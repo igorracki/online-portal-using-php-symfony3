@@ -1,0 +1,60 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} Meeting Details {% endblock %}
+
+{% block nav %}
+    {% embed "navBar.html.twig" %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+    <h3>Viewing Meeting For Project - {{ project.name }}</h3>
+
+    <table>
+        <tr>
+            <td colspan="2">{{ meeting.id }}</td>
+        </tr>
+        <tr>
+            <th>Meeting Chair: </th>
+            <td>{{ meeting.chair }}</td>
+        </tr>
+        <tr>
+            <th>Meeting Secretary: </th>
+            <td>{{ meeting.secretary }}</td>
+        </tr>
+        <tr>
+            <th>Meeting Time: </th>
+            <td>{{ meeting.time }}</td>
+        </tr>
+        <tr>
+            <th> Meeting Room: </th>
+            <td>{{ meeting.room }}</td>
+        </tr>
+        <tr>
+            <th> Attendance Percentage: </th>
+            <td>{{ attendancePercentage }}%</td>
+        </tr>
+    </table>
+
+    <p> Your Attendance is: {{ attendance }}</p>
+
+    {% if attendance != 'Yes' %}
+        <form action="/changeAttendance" method="post">
+            <label for="yes">Yes</label>
+            <input type="radio" name="attendance" id="yes" value="Yes">
+            {% if attendance != 'No' %}
+                <label for="no">No</label>
+                <input type="radio" name="attendance" id="no" value="No">
+            {% endif %}
+            {% if attendance != 'Maybe' %}
+                <label for="maybe">Maybe</label>
+                <input type="radio" name="attendance" id="maybe" value="Maybe">
+            {% endif %}
+            <input type="hidden" name="userID" value="{{ id }}">
+            <input type="hidden" name="projectID" value="{{ project.id }}">
+            <input type="hidden" name="meetingID" value="{{ meeting.id }}">
+            <br>
+            <input type="submit" name="submit" value="Change">
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} New Meeting {% endblock %}
+
+{% block nav %}
+    {% embed "navBar.html.twig" %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+    <h3> Create a new meeting for Project - {{ project.name }}</h3>
+
+    <p>{% if message is defined %} {{ message }} {% endif %}</p>
+
+    <form action="/newMeeting" method="post">
+        <label for="chair">Meeting Chair: </label>
+        <select name="chair" id="chair">
+            <option value="0"> Current Project Leader</option>
+            {% for user in users %}
+                {% if user.type == 'user'%}
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+        <label for="secretary">Meeting Secretary: </label>
+        <select name="secretary" id="secretary">
+            <option value="0"> Current Project Secretary</option>
+            {% for user in users %}
+                {% if user.type == 'user' %}
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+        <label for="meetingDate">Meeting Date: </label>
+        <input type="date" name="meetingDate" id="meetingDate" value="{{ currentDate }}" required>
+        <br>
+        <label for="meetingTime">Meeting Time: </label>
+        <input type="time" name="meetingTime" id="meetingTime" required>
+        <br>
+        <label for="room">Meeting Room: </label>
+        <input type="text" name="room" id="room" required>
+        <br>
+        <label for="agendaDate">Agenda Deadline Date: </label>
+        <input type="date" name="agendaDate" id="agendaDate" value="{{ currentDate }}" required>
+        <br>
+        <label for="agendaTime">Agenda Deadline Time: </label>
+        <input type="time" name="agendaTime" id="agendaTime" required>
+        <br>
+        <input type="hidden" name="projectID" value="{{ project.id }}">
+        <input type="submit" name="submit" value="Create Meeting">
+    </form>
+{% endblock %}

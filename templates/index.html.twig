@@ -1,0 +1,25 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} Home {% endblock %}
+
+{% block nav %}
+    {% embed "navBar.html.twig" %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+    <h1>
+        Welcome <b> {{ name }} </b>
+    </h1>
+    <p> Username: <b> {{ username }}</b> account type: <b> {{ type }}</b></p>
+
+    {% if message is defined %}
+        <i> {{ message }}</i>
+    {% endif %}
+
+    {% if allProjects is defined %}
+        {% embed "indexProjectList.twig" %}
+        {% endembed %}
+    {% endif %}
+
+{% endblock %}

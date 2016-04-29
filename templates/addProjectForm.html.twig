@@ -1,0 +1,42 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} Create New Project {% endblock %}
+
+{% block nav %}
+    {% embed "navBar.html.twig" %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+    <h1> Create a New Project </h1>
+
+    {% if message is defined %}
+        {{ message }}
+    {% endif %}
+
+    <form action="/newProject" method="post">
+        <label for="name">Project Name: </label>
+        <input type="text" name="name" id="name" required>
+        <br>
+        <label for="leader">Project Leader : </label>
+        <select name="leader" id="leader" required>
+            {% for user in listOfUsers %}
+                {% if user.type == 'user' %}
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+        <label for="secretary">Project Secretary : </label>
+        <select name="secretary" id="secretary" required>
+            {% for user in listOfUsers %}
+                {% if user.type == 'user' %}
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" name="submit" value="Create">
+    </form>
+
+{% endblock %}

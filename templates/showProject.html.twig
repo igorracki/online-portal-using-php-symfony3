@@ -1,0 +1,60 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} {{ project.name }} {% endblock %}
+
+{% block nav %}
+    {% embed "navBar.html.twig" %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+
+    {% if isLeader %}
+        {% if project.locked == 0%}
+            <a href="/newRole/{{ project.id }}"> Add New Role</a>
+            <a href="/addMember/{{ project.id }}"> Add Members</a>
+            <a href="/newMeeting/{{ project.id }}"> New Meeting</a>
+        {% else %}
+            <p>Project locked - No actions available</p>
+        {% endif %}
+    {% endif %}
+
+    <h3> Viewing details for {{ project.name }}</h3>
+
+    <p> Project status:
+        {% if project.locked == 0 %}
+            Unlocked
+        {% elseif project.locked == 1 %}
+            Locked
+        {% endif %}
+    </p>
+
+    {% if isLeader %}
+        <p><b> You are the leader of this project.</b></p>
+    {% endif %}
+
+    <table>
+        {% for member in members %}
+            <tr>
+                <th> {{ member.memberRole }}</th>
+                <td> {{ member.memberName }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if type == 'admin' %}
+        <form action="/projectStatus" method="post">
+            <input type="hidden" name="projectID" id="projectID" value="{{ project.id }}">
+            <input type="hidden" name="status" id="status" value="{{ project.locked }}">
+            <input type="submit" name="submit" value="
+                {% if project.locked == 0 %}
+                    Lock Project
+                {% elseif project.locked == 1 %}
+                    Unlock Project
+                {% endif %}">
+        </form>
+    {% endif %}
+
+    {% embed "displayMeetings.html.twig" %}
+    {% endembed %}
+{% endblock %}

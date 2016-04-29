@@ -1,0 +1,15 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} Log In {% endblock %}
+
+{% block main %}
+
+    <h1> Log In To The Portal </h1>
+
+    {% if errorMessage is defined %}
+        {{ errorMessage }}
+    {% endif %}
+
+    {% embed "loginForm.html.twig" %}
+    {% endembed %}
+{% endblock %}

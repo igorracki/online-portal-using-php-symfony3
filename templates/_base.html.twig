@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Assignment {% block pageTitle %}{% endblock %}</title>
+    <style>
+        @import "/css/style.css";
+    </style>
+</head>
+<body>
+
+<!-- nav -->
+<nav>
+    {% block nav %}
+    {% endblock %}
+</nav>
+<hr>
+
+{% block main %}
+{% endblock %}
+
+</body>
+</html>

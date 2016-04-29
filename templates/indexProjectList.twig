@@ -1,0 +1,23 @@
+<h3> List of All Projects </h3>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Locked</th>
+        <th> </th>
+    </tr>
+    {% for project in allProjects %}
+        <tr>
+            <td> {{ project.id }}</td>
+            <td> {{ project.name }}</td>
+            <td>
+                {% if project.locked == 0 %}
+                Unlocked
+                {% elseif project.locked == 1 %}
+                Locked
+                {% endif %}
+            </td>
+            <td><a href="/project/{{ project.id }}">View Project</a></td>
+        </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,24 @@
+{% extends '_base.html.twig' %}
+
+{% block pageTitle %} New Role {% endblock %}
+
+{% block nav %}
+    {% embed "navBar.html.twig" %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+    <h3> Create a New Role </h3>
+
+    {% if message is defined %}
+        <p> {{ message }}</p>
+    {% endif %}
+
+    <form action="/newRole" method="post">
+        <label for="roleName"> Role Name: </label>
+        <input type="text" name="roleName" id="roleName" required>
+        <input type="hidden" name="projectID" value="{{ projectID }}">
+        <br>
+        <input type="submit" name="submit" value="Add Role">
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+<h3> List of Meetings for this Project.</h3>
+{% if meetings is defined %}
+    {% for meeting in meetings %}
+        <table>
+            <tr>
+                <td colspan="2">{{ meeting.id }}</td>
+            </tr>
+            <tr>
+                <th>Meeting Chair: </th>
+                <td>{{ meeting.chair }}</td>
+            </tr>
+            <tr>
+                <th>Meeting Secretary: </th>
+                <td>{{ meeting.secretary }}</td>
+            </tr>
+            <tr>
+                <th>Meeting Time: </th>
+                <td>{{ meeting.time }}</td>
+            </tr>
+            <tr>
+                <th> Meeting Room: </th>
+                <td>{{ meeting.room }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="/showMeeting/{{ meeting.id }}/{{ project.id }}">View Meeting</a></td>
+            </tr>
+        </table>
+        <br>
+    {% endfor %}
+{% endif %}
+{% if meetings is empty %}
+    <p> There are no meetings for this project.</p>
+{% endif %}
