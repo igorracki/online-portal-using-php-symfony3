@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block main %}
-    <h1>
+    <h1 class="info">
         Welcome <b> {{ name }} </b>
     </h1>
-    <p> Username: <b> {{ username }}</b> account type: <b> {{ type }}</b></p>
+    <p class="info"> Username: <b> {{ username }}</b> account type: <b> {{ type }}</b></p>
 
     {% if message is defined %}
         <i> {{ message }}</i>

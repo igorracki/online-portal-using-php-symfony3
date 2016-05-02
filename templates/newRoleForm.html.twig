@@ -8,17 +8,24 @@
 {% endblock %}
 
 {% block main %}
-    <h3> Create a New Role </h3>
+    <h3 class="info"> Create a New Role </h3>
 
     {% if message is defined %}
-        <p> {{ message }}</p>
+        <p class="error"> {{ message }}</p>
     {% endif %}
 
     <form action="/newRole" method="post">
-        <label for="roleName"> Role Name: </label>
-        <input type="text" name="roleName" id="roleName" required>
-        <input type="hidden" name="projectID" value="{{ projectID }}">
-        <br>
-        <input type="submit" name="submit" value="Add Role">
+        <table class="noBorder" align="center">
+            <tr>
+                <th><label for="roleName"> Role Name: </label></th>
+                <td>
+                    <input type="text" name="roleName" id="roleName" required>
+                    <input type="hidden" name="projectID" value="{{ projectID }}">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="submit" value="Add Role"></td>
+            </tr>
+        </table>
     </form>
 {% endblock %}

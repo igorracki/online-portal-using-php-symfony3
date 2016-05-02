@@ -8,47 +8,64 @@
 {% endblock %}
 
 {% block main %}
-    <h3> Create a new meeting for Project - {{ project.name }}</h3>
+    <h3 class="info"> Create a new meeting for Project - {{ project.name }}</h3>
 
-    <p>{% if message is defined %} {{ message }} {% endif %}</p>
+    {% if message is defined %}<p class="error"> {{ message }}</p> {% endif %}
 
     <form action="/newMeeting" method="post">
-        <label for="chair">Meeting Chair: </label>
-        <select name="chair" id="chair">
-            <option value="0"> Current Project Leader</option>
-            {% for user in users %}
-                {% if user.type == 'user'%}
-                    <option value="{{ user.id }}">{{ user.name }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <br>
-        <label for="secretary">Meeting Secretary: </label>
-        <select name="secretary" id="secretary">
-            <option value="0"> Current Project Secretary</option>
-            {% for user in users %}
-                {% if user.type == 'user' %}
-                    <option value="{{ user.id }}">{{ user.name }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <br>
-        <label for="meetingDate">Meeting Date: </label>
-        <input type="date" name="meetingDate" id="meetingDate" value="{{ currentDate }}" required>
-        <br>
-        <label for="meetingTime">Meeting Time: </label>
-        <input type="time" name="meetingTime" id="meetingTime" required>
-        <br>
-        <label for="room">Meeting Room: </label>
-        <input type="text" name="room" id="room" required>
-        <br>
-        <label for="agendaDate">Agenda Deadline Date: </label>
-        <input type="date" name="agendaDate" id="agendaDate" value="{{ currentDate }}" required>
-        <br>
-        <label for="agendaTime">Agenda Deadline Time: </label>
-        <input type="time" name="agendaTime" id="agendaTime" required>
-        <br>
-        <input type="hidden" name="projectID" value="{{ project.id }}">
-        <input type="submit" name="submit" value="Create Meeting">
+        <table class="noBorder" align="center">
+            <tr>
+                <th><label for="chair">Meeting Chair: </label></th>
+                <td>
+                    <select name="chair" id="chair">
+                        <option value="0"> Current Project Leader</option>
+                        {% for user in users %}
+                            {% if user.type == 'user'%}
+                                <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="secretary">Meeting Secretary: </label></th>
+                <td>
+                    <select name="secretary" id="secretary">
+                        <option value="0"> Current Project Secretary</option>
+                        {% for user in users %}
+                            {% if user.type == 'user' %}
+                                <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meetingDate">Meeting Date: </label></th>
+                <td><input type="date" name="meetingDate" id="meetingDate" value="{{ currentDate }}" required></td>
+            </tr>
+            <tr>
+                <th><label for="meetingTime">Meeting Time: </label></th>
+                <td><input type="time" name="meetingTime" id="meetingTime" required></td>
+            </tr>
+            <tr>
+                <th><label for="room">Meeting Room: </label></th>
+                <td><input type="text" name="room" id="room" required></td>
+            </tr>
+            <tr>
+                <th><label for="agendaDate">Agenda Deadline Date: </label></th>
+                <td><input type="date" name="agendaDate" id="agendaDate" value="{{ currentDate }}" required></td>
+            </tr>
+            <tr>
+                <th><label for="agendaTime">Agenda Deadline Time: </label></th>
+                <td><input type="time" name="agendaTime" id="agendaTime" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="hidden" name="projectID" value="{{ project.id }}">
+                    <input type="submit" name="submit" value="Create Meeting">
+                </td>
+            </tr>
+        </table>
     </form>
 {% endblock %}

@@ -8,30 +8,42 @@
 {% endblock %}
 
 {% block main %}
-    <h3> Add Members to the Project - {{ project.name }}</h3>
+    <h3 class="info"> Add Members to the Project - {{ project.name }}</h3>
 
-    <p> {% if message is defined %}{{ message }}{% endif %}</p>
+    {% if message is defined %}<p class="error"> {{ message }}</p>{% endif %}
 
     <form action = '/addMember' method="post">
-        <label for="user"> Select Member: </label>
-        <select name="user" id="user">
-            {% for user in users %}
-                {% if user.type == 'user' %}
-                    <option value="{{ user.id }}">{{ user.name }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <br>
-        <label for="role">Select Role: </label>
-        <select name="role" id="role">
-            {% for role in roles %}
-                {% if role.role != 'Project Leader' and role.role != 'Project Secretary' %}
-                    <option value="{{ role.id }}">{{ role.role }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <br>
-        <input type="hidden" name="projectID" value="{{ project.id }}">
-        <input type="submit" name="submit" value="Add">
+        <table class="noBorder" align="center">
+            <tr>
+                <th><label for="user"> Select Member: </label></th>
+                 <td>
+                    <select name="user" id="user">
+                    {% for user in users %}
+                        {% if user.type == 'user' %}
+                            <option value="{{ user.id }}">{{ user.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="role">Select Role: </label></th>
+                <td>
+                    <select name="role" id="role">
+                    {% for role in roles %}
+                        {% if role.role != 'Project Leader' and role.role != 'Project Secretary' %}
+                            <option value="{{ role.id }}">{{ role.role }}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="hidden" name="projectID" value="{{ project.id }}">
+                    <input type="submit" name="submit" value="Add">
+                </td>
+            </tr>
+        </table>
     </form>
 {% endblock %}

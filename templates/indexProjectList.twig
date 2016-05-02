@@ -1,5 +1,5 @@
-<h3> List of All Projects </h3>
-<table>
+<h3 class="info"> List of All Projects </h3>
+<table align="center">
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -10,14 +10,14 @@
         <tr>
             <td> {{ project.id }}</td>
             <td> {{ project.name }}</td>
-            <td>
+            <td class="infoStatus">
                 {% if project.locked == 0 %}
                 Unlocked
                 {% elseif project.locked == 1 %}
                 Locked
                 {% endif %}
             </td>
-            <td><a href="/project/{{ project.id }}">View Project</a></td>
+            <td><a class="button" href="/project/{{ project.id }}">View Project</a></td>
         </tr>
     {% endfor %}
 </table>
