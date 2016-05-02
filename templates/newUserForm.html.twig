@@ -8,23 +8,30 @@
 {% endblock %}
 
 {% block main %}
-    <h1> Add New User To The Database </h1>
+    <h1 class="info"> Add New User To The Database </h1>
 
     {% if message is defined %}
-        {{ message }}
+        <p class="error">{{ message }}</p>
     {% endif %}
 
     <form action="/addUser" method="post">
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name" required autofocus>
-        <br>
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" required>
-        <br>
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <input type="submit" name="submit" value="Add User">
+        <table class="noBorder" align="center">
+            <tr>
+                <th><label for="name">Name: </label></th>
+                <td><input type="text" name="name" id="name" required autofocus></td>
+            </tr>
+            <tr>
+                <th><label for="username">Username: </label></th>
+                <td><input type="text" name="username" id="username" required></td>
+            </tr>
+            <tr>
+                <th><label for="password">Password: </label></th>
+                <td><input type="password" name="password" id="password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="submit" value="Add User"></td>
+            </tr>
+        </table>
     </form>
 
 {% endblock %}

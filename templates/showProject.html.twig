@@ -11,17 +11,19 @@
 
     {% if isLeader %}
         {% if project.locked == 0%}
-            <a href="/newRole/{{ project.id }}"> Add New Role</a>
-            <a href="/addMember/{{ project.id }}"> Add Members</a>
-            <a href="/newMeeting/{{ project.id }}"> New Meeting</a>
+            <div class = "actions">
+                <a href="/newRole/{{ project.id }}"> Add New Role</a>
+                <a href="/addMember/{{ project.id }}"> Add Members</a>
+                <a href="/newMeeting/{{ project.id }}"> New Meeting</a>
+            </div>
         {% else %}
-            <p>Project locked - No actions available</p>
+            <p class = "error">Project locked - No actions available</p>
         {% endif %}
     {% endif %}
 
-    <h3> Viewing details for {{ project.name }}</h3>
+    <h3 class = "info"> Viewing details for {{ project.name }}</h3>
 
-    <p> Project status:
+    <p class = "infoStatus"> Project status:
         {% if project.locked == 0 %}
             Unlocked
         {% elseif project.locked == 1 %}
@@ -30,10 +32,12 @@
     </p>
 
     {% if isLeader %}
-        <p><b> You are the leader of this project.</b></p>
+        <p class = "info"><b> You are the leader of this project.</b></p>
     {% endif %}
 
-    <table>
+    <p class="info"> Project Details</p>
+
+    <table align="center">
         {% for member in members %}
             <tr>
                 <th> {{ member.memberRole }}</th>
@@ -44,17 +48,29 @@
 
     {% if type == 'admin' %}
         <form action="/projectStatus" method="post">
-            <input type="hidden" name="projectID" id="projectID" value="{{ project.id }}">
-            <input type="hidden" name="status" id="status" value="{{ project.locked }}">
-            <input type="submit" name="submit" value="
-                {% if project.locked == 0 %}
-                    Lock Project
-                {% elseif project.locked == 1 %}
-                    Unlock Project
-                {% endif %}">
+            <table class="noBorder" align="center">
+                <tr>
+                    <td align="center">
+                        <input type="hidden" name="projectID" id="projectID" value="{{ project.id }}">
+                        <input type="hidden" name="status" id="status" value="{{ project.locked }}">
+                        <input type="submit" name="submit" value="
+                            {% if project.locked == 0 %}
+                                Lock Project
+                            {% elseif project.locked == 1 %}
+                                Unlock Project
+                            {% endif %}">
+                    </td>
+                </tr>
+            </table>
         </form>
     {% endif %}
 
-    {% embed "displayMeetings.html.twig" %}
-    {% endembed %}
+    <h3 class="info"> List of Meetings for this Project.</h3>
+    {% if meetings is empty %}
+        <p class="error"> There are no meetings for this project.</p>
+    {% endif %}
+    <div class = "meetings">
+        {% embed "displayMeetings.html.twig" %}
+        {% endembed %}
+    </div>
 {% endblock %}

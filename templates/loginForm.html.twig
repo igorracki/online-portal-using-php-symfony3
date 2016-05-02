@@ -1,9 +1,25 @@
 <form action="/login" method="post">
-    <label for="username"> Username: </label>
-    <input type="text" name="username" id="username" required autofocus>
-    <br>
-    <label for="password"> Password: </label>
-    <input type="password" name="password" id="password" required>
-    <br>
-    <input type="submit" name="submit" value="Log In">
+    <table class="noBorder" align="center">
+        <tr>
+            <th>
+                <label for="username"> Username: </label>
+            </th>
+            <td>
+                <input type="text" name="username" id="username" required autofocus>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="password"> Password: </label>
+            </th>
+            <td>
+                <input type="password" name="password" id="password" required>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="submit" value="Log In">
+            </td>
+        </tr>
+    </table>
 </form>

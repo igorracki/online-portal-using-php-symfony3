@@ -4,10 +4,10 @@
 
 {% block main %}
 
-    <h1> Log In To The Portal </h1>
+    <h1 class="info"> Log In To The Portal </h1>
 
     {% if errorMessage is defined %}
-        {{ errorMessage }}
+        <p class="error">{{ errorMessage }}</p>
     {% endif %}
 
     {% embed "loginForm.html.twig" %}

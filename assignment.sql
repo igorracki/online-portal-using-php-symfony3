@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Apr 29, 2016 at 07:53 AM
+-- Generation Time: May 02, 2016 at 04:16 PM
 -- Server version: 10.1.9-MariaDB-log
 -- PHP Version: 5.6.16
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `assignment`
 --
+CREATE DATABASE IF NOT EXISTS `assignment` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `assignment`;
 
 -- --------------------------------------------------------
 

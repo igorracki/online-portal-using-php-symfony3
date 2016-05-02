@@ -8,11 +8,11 @@
 {% endblock %}
 
 {% block main %}
-    <h3>Viewing Meeting For Project - {{ project.name }}</h3>
+    <h3 class="info">Viewing Meeting For Project - {{ project.name }}</h3>
 
-    <table>
+    <table align="center">
         <tr>
-            <td colspan="2">{{ meeting.id }}</td>
+            <td colspan="2" align="center">{{ meeting.id }}</td>
         </tr>
         <tr>
             <th>Meeting Chair: </th>
@@ -36,25 +36,38 @@
         </tr>
     </table>
 
-    <p> Your Attendance is: {{ attendance }}</p>
+    {% if type != 'admin' %}
+    <p class="info"> Your Attendance is: {{ attendance }}</p>
 
-    {% if attendance != 'Yes' %}
-        <form action="/changeAttendance" method="post">
-            <label for="yes">Yes</label>
-            <input type="radio" name="attendance" id="yes" value="Yes">
-            {% if attendance != 'No' %}
-                <label for="no">No</label>
-                <input type="radio" name="attendance" id="no" value="No">
-            {% endif %}
-            {% if attendance != 'Maybe' %}
-                <label for="maybe">Maybe</label>
-                <input type="radio" name="attendance" id="maybe" value="Maybe">
-            {% endif %}
-            <input type="hidden" name="userID" value="{{ id }}">
-            <input type="hidden" name="projectID" value="{{ project.id }}">
-            <input type="hidden" name="meetingID" value="{{ meeting.id }}">
-            <br>
-            <input type="submit" name="submit" value="Change">
-        </form>
+        {% if attendance != 'Yes' %}
+            <form action="/changeAttendance" method="post">
+                <table class="noBorder" align="center">
+                    <tr>
+                        <th><label for="yes">Yes</label></th>
+                        <td><input type="radio" name="attendance" id="yes" value="Yes"></td>
+                    </tr>
+                {% if attendance != 'No' %}
+                    <tr>
+                        <th><label for="no">No</label></th>
+                        <td><input type="radio" name="attendance" id="no" value="No"></td>
+                    </tr>
+                {% endif %}
+                {% if attendance != 'Maybe' %}
+                    <tr>
+                        <th><label for="maybe">Maybe</label></th>
+                        <td><input type="radio" name="attendance" id="maybe" value="Maybe"></td>
+                    </tr>
+                {% endif %}
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="hidden" name="userID" value="{{ id }}">
+                            <input type="hidden" name="projectID" value="{{ project.id }}">
+                            <input type="hidden" name="meetingID" value="{{ meeting.id }}">
+                            <input type="submit" name="submit" value="Change">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        {% endif %}
     {% endif %}
 {% endblock %}

@@ -8,35 +8,46 @@
 {% endblock %}
 
 {% block main %}
-    <h1> Create a New Project </h1>
+    <h1 class="info"> Create a New Project </h1>
 
     {% if message is defined %}
-        {{ message }}
+        <p class="error">{{ message }}</p>
     {% endif %}
 
     <form action="/newProject" method="post">
-        <label for="name">Project Name: </label>
-        <input type="text" name="name" id="name" required>
-        <br>
-        <label for="leader">Project Leader : </label>
-        <select name="leader" id="leader" required>
-            {% for user in listOfUsers %}
-                {% if user.type == 'user' %}
-                    <option value="{{ user.id }}">{{ user.name }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <br>
-        <label for="secretary">Project Secretary : </label>
-        <select name="secretary" id="secretary" required>
-            {% for user in listOfUsers %}
-                {% if user.type == 'user' %}
-                    <option value="{{ user.id }}">{{ user.name }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <br>
-        <input type="submit" name="submit" value="Create">
+        <table class="noBorder" align="center">
+            <tr>
+                <th><label for="name">Project Name: </label></th>
+                <td><input type="text" name="name" id="name" required></td>
+            </tr>
+            <tr>
+                <th><label for="leader">Project Leader : </label></th>
+                <td>
+                    <select name="leader" id="leader" required>
+                        {% for user in listOfUsers %}
+                            {% if user.type == 'user' %}
+                                <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="secretary">Project Secretary : </label></th>
+                <td>
+                    <select name="secretary" id="secretary" required>
+                        {% for user in listOfUsers %}
+                            {% if user.type == 'user' %}
+                                <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="submit" value="Create"></td>
+            </tr>
+        </table>
     </form>
 
 {% endblock %}
